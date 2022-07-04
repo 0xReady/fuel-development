@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "contracts": "run-s contracts:build contracts:deploy",
+    "contracts:build": "npx ts-node packages/scripts/buildContracts.ts",
+    "contracts:deploy": "npx ts-node packages/scripts/deployContracts.ts",
+    "services:clean": "make -C docker services-clean",
+    "services:setup": "run-s services:run contracts",
+    "services:run": "make -C docker services-run",
+    "services:reset": "run-s services:clean services:setup"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.41",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": ["react", "react-dom"],
+      "ignoreMissing": ["react", "react-dom"]
+    }
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "fuels": "^0.7.0",
+    "typechain": "^8.1.0",
+    "typechain-target-fuels": "0.0.0-master-b32f29b9"
+  }
+}
